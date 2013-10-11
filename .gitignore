@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+# ignore vim swp files and gedit temp files
+*.swp
+*.*~
+.vim

@@ -1,0 +1,22 @@
+Package: asterisk
+Type: Package
+Title: Indicate significance level
+Version: 0.02
+Date: 2013-11-13
+Author: Lars
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: Adds asterisks to plots
+License: GPL-2
+Suggests:
+    combinat,
+    parallel,
+    ggplot2,
+    plyr
+Depends:
+    R (>= 2.10)
+Collate:
+    'addAsterisk.R'
+    'calcAsterisk.R'
+    'simpleArrange.R'
+    'complexArrange.R'
+    'permnArrange.R'
