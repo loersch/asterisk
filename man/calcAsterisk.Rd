@@ -5,7 +5,8 @@
 \title{Calc Asterisk}
 \usage{
 calcAsterisk(var1, var2, ylim, coords = NULL, diff = Inf, pos = "b",
-  p.value = 0.05, pos.as = "h", densely = F, extraspace = 0)
+  p.value = 0.05, pos.as = "h", densely = F, extraspace = 0,
+  lvls = NULL)
 }
 \arguments{
 \item{var1}{y-Value}

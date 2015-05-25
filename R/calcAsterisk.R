@@ -11,9 +11,21 @@
 #' @param densely boolean, try to calculate the densest arrangement
 
 
-calcAsterisk <- function (var1, var2, ylim, coords = NULL, diff = Inf, pos = "b", p.value = 0.05, pos.as = "h", densely = F, extraspace = 0)
+calcAsterisk <- function (var1, var2, ylim, coords = NULL, diff = Inf, pos = "b", p.value = 0.05, pos.as = "h", densely = F, extraspace = 0, lvls = NULL)
 {
   raw <- pairwise.t.test(var1, as.factor(var2), p.adj = "holm")$p.value
+  # fill missing levels
+  if (!is.null(lvls)) {
+    nlvls <- nlevels(lvls)
+    tmp <- matrix(data = NA, nrow = nlvls - 1, ncol = nlvls - 1, dimnames = list(levels(lvls)[-1], levels(lvls)[-nlvls]))
+    rows <- rownames(tmp) %in% rownames(raw)  
+    for (var in colnames(raw)) {
+      tmp[rows,var] <- raw[,var] 
+    } 
+    raw <- tmp
+    rm(tmp,lvls,nlvls,rows,var)
+  }
+  
   raw[raw >= p.value] <- NA
   cors <- raw
   cors[raw < 0.05] <- "*"

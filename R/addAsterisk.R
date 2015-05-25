@@ -14,6 +14,7 @@
 #' @param ggplot a plot created with ggplot
 #' @param facet.vars Lay out panels in a grid (vars).
 #' @param facet.names Lay out panels in a grid (names).
+#' @import plyr ggplot2
 #' @export addAsterisks
 #' @examples
 #' \dontrun{
@@ -43,10 +44,11 @@ addAsterisks <- function(var1, var2, ylim, coords = NULL, diff = Inf, pos = "b",
 
   if (!is.null(facet.vars) & !is.null(facet.names)) {
     tmp <- data.frame(var1, var2, facet.vars)
+    lvls <- as.factor(tmp$var2)
     res <- ddply(tmp, names(tmp)[3:ncol(tmp)],
-                 function(x, ylim, coords, diff, pos, p.value, pos.as, densely, extraspace) {
-                   calcAsterisk(x[,1], x[,2], ylim, coords, diff, pos, p.value, pos.as, densely, extraspace)},
-                 ylim, coords, diff, pos, p.value, pos.as, densely, extraspace)
+                 function(x, ylim, coords, diff, pos, p.value, pos.as, densely, extraspace, lvls) {
+                   calcAsterisk(x[,1], x[,2], ylim, coords, diff, pos, p.value, pos.as, densely, extraspace, lvls)},
+                 ylim, coords, diff, pos, p.value, pos.as, densely, extraspace, lvls)
   } else {
     res <- calcAsterisk(var1, var2, ylim, coords, diff, pos, p.value, pos.as, densely, extraspace)
     #list2env(res, environment())
